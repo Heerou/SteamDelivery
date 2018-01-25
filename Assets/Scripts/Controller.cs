@@ -9,20 +9,24 @@ public class Controller : MonoBehaviour {
 
     //Speed of the player
     public float maxSpeed = 10f;
-    bool facingRight = true;
 
     //Jump of the player
-    public float jumpForce = 8f;    
+    public float jumpForce = 9f;    
 
     //Ground
     bool grounded = false;
     public Transform groundCheck;
     float groundRadius = 0.2f;
-    public LayerMask whatIsGround = 9;    
+    public LayerMask whatIsGround = 9;
+
+    //Shotting
+    public Transform bulletEmitter;
+    public GameObject bullet;
 
     // Use this for initialization
     void Start () {
-        characterRigidBody = GetComponent<Rigidbody2D>();        
+        characterRigidBody = GetComponent<Rigidbody2D>();
+        characterRigidBody.freezeRotation = true;
     }
 
     // Update is called once per frame
@@ -36,21 +40,13 @@ public class Controller : MonoBehaviour {
         float move = Input.GetAxis("Horizontal");
         characterRigidBody.velocity = new Vector2(move * maxSpeed, characterRigidBody.velocity.y);
 
-        if (move > 0 && !facingRight) {
-            Flip();
-        } else if (move < 0 && facingRight) {
-            Flip();
-        }
-
         if(Input.GetKeyDown(KeyCode.Space) && grounded) {            
             characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x, jumpForce);
         }
-    }
 
-    void Flip() {
-        facingRight = !facingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
+        if(Input.GetKeyDown(KeyCode.X)) {
+
+            Instantiate(bullet, bulletEmitter.position, bulletEmitter.rotation);
+        }
     }
 }
