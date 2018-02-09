@@ -5,24 +5,24 @@ using UnityEngine;
 public class BulletController : MonoBehaviour {
 
     public float bulletSpeed;
-    private Rigidbody2D bulletRigidBody;
+    private Rigidbody bulletRigidBody;
 
     // Use this for initialization
     void Start () {
-        bulletRigidBody = GetComponent<Rigidbody2D>();
+        bulletRigidBody = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        bulletRigidBody.velocity = new Vector2(bulletSpeed, bulletRigidBody.velocity.y);
+        bulletRigidBody.velocity = new Vector3(bulletSpeed, bulletRigidBody.velocity.y, 0);
         Destroy(gameObject, 3f);
     }
 
-    void OnTriggerEnter2D(Collider2D collider) {
+    void OnTriggerEnter(Collider collider) {
         Destroy(gameObject);
 
         if(collider.gameObject.tag == "Player") {
-            Physics2D.IgnoreCollision(collider.GetComponent<Collider2D>(), collider);
+            Physics.IgnoreCollision(collider.GetComponent<CharacterController>(), collider);
         }
     }
 }
