@@ -7,16 +7,22 @@ public class PlayerController : MonoBehaviour {
     private CharacterController characterController;
     private bool isGrounded;
     public float gravity;
+    private float gravityStore;
     private float fallSpeed;
     public float jumpForce;
     public float moveSpeed;
     //Shotting
     public Transform bulletEmitter;
     public GameObject bullet;
+    //Onladder
+    public bool onLadder;
+    public float climbSpeed;
+    private float climbVelocity;
 
     // Use this for initialization
     void Start () {
         characterController = GetComponent<CharacterController>();
+        gravityStore = gravity;
     }
 	
 	// Update is called once per frame
@@ -26,6 +32,7 @@ public class PlayerController : MonoBehaviour {
         Jump();
         PlayerMove();
         ShootingBullets();
+        IntheLadder();
 
     }
 
@@ -61,6 +68,17 @@ public class PlayerController : MonoBehaviour {
     void ShootingBullets() {
         if (Input.GetKeyDown(KeyCode.X)) {
             Instantiate(bullet, bulletEmitter.position, bulletEmitter.rotation);
+        }
+    }
+
+    void IntheLadder() {
+        if (onLadder) {
+            gravity = 0f;
+            fallSpeed = 0f;
+            climbVelocity = climbSpeed * Input.GetAxis("Vertical") * Time.deltaTime;
+            characterController.Move(new Vector3(characterController.velocity.x, climbVelocity));
+        } else {
+            gravity = gravityStore;
         }
     }
 }

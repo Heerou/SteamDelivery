@@ -15,7 +15,7 @@ public class BulletController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         bulletRigidBody.velocity = new Vector3(bulletSpeed, bulletRigidBody.velocity.y, 0);
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 2f);
     }
 
     void OnTriggerEnter(Collider collider) {
