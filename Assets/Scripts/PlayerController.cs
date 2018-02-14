@@ -66,12 +66,32 @@ public class PlayerController : MonoBehaviour {
     }
 
     void ShootingBullets() {
+        //just instantiate the bullet
         if (Input.GetKeyDown(KeyCode.X)) {
             Instantiate(bullet, bulletEmitter.position, bulletEmitter.rotation);
+        }
+        if (Input.GetKeyDown(KeyCode.X) && Input.GetKeyDown(KeyCode.UpArrow)){
+
+        }
+        if (Input.GetKeyDown(KeyCode.X) && Input.GetKeyDown(KeyCode.UpArrow) && Input.GetKeyDown(KeyCode.RightArrow)) {
+
+        }
+        if (Input.GetKeyDown(KeyCode.X) && Input.GetKeyDown(KeyCode.UpArrow) && Input.GetKeyDown(KeyCode.LeftArrow)) {
+
+        }
+        if (!isGrounded && Input.GetKeyDown(KeyCode.X) && Input.GetKeyDown(KeyCode.DownArrow)) {
+
+        }
+        if (!isGrounded && Input.GetKeyDown(KeyCode.X) && Input.GetKeyDown(KeyCode.DownArrow) && Input.GetKeyDown(KeyCode.RightArrow)) {
+
+        }
+        if (!isGrounded && Input.GetKeyDown(KeyCode.X) && Input.GetKeyDown(KeyCode.DownArrow) && Input.GetKeyDown(KeyCode.LeftArrow)) {
+
         }
     }
 
     void IntheLadder() {
+        //When i touch the ladder i climb it
         if (onLadder) {
             gravity = 0f;
             fallSpeed = 0f;
