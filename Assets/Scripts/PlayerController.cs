@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Jump() {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) {
+        if (Input.GetButton("Jump") && isGrounded) {
             fallSpeed = -jumpForce;
         }
     }
@@ -67,26 +67,8 @@ public class PlayerController : MonoBehaviour {
 
     void ShootingBullets() {
         //just instantiate the bullet
-        if (Input.GetKeyDown(KeyCode.X)) {
+        if (Input.GetButtonDown("Fire1")) {
             Instantiate(bullet, bulletEmitter.position, bulletEmitter.rotation);
-        }
-        if (Input.GetKeyDown(KeyCode.X) && Input.GetKeyDown(KeyCode.UpArrow)){
-
-        }
-        if (Input.GetKeyDown(KeyCode.X) && Input.GetKeyDown(KeyCode.UpArrow) && Input.GetKeyDown(KeyCode.RightArrow)) {
-
-        }
-        if (Input.GetKeyDown(KeyCode.X) && Input.GetKeyDown(KeyCode.UpArrow) && Input.GetKeyDown(KeyCode.LeftArrow)) {
-
-        }
-        if (!isGrounded && Input.GetKeyDown(KeyCode.X) && Input.GetKeyDown(KeyCode.DownArrow)) {
-
-        }
-        if (!isGrounded && Input.GetKeyDown(KeyCode.X) && Input.GetKeyDown(KeyCode.DownArrow) && Input.GetKeyDown(KeyCode.RightArrow)) {
-
-        }
-        if (!isGrounded && Input.GetKeyDown(KeyCode.X) && Input.GetKeyDown(KeyCode.DownArrow) && Input.GetKeyDown(KeyCode.LeftArrow)) {
-
         }
     }
 
