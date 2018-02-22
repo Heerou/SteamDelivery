@@ -66,6 +66,16 @@ public class PlayerController : MonoBehaviour {
     }
 
     void ShootingBullets() {
+        //The player rotates to the mouse position
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+        Vector3 direction = new Vector3(
+            mousePosition.x - transform.position.x,
+            mousePosition.y - transform.position.y, 0);
+
+        transform.up = direction;
+
         //just instantiate the bullet
         if (Input.GetButtonDown("Fire1")) {
             Instantiate(bullet, bulletEmitter.position, bulletEmitter.rotation);
