@@ -20,8 +20,7 @@ public class Ladder : MonoBehaviour {
 
     void OnTriggerExit(Collider other) {
         if (other.tag == "Player" && other.name == "Player") {
-            ThePlayer.onLadder = false;
-            ThePlayer.characterController.Move(Vector3.zero);
+            ThePlayer.onLadder = false;            
         }
     }
 }

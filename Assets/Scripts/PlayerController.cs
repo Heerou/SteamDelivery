@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour {
             gravity = 0f;
             fallSpeed = 0f;
             climbVelocity = climbSpeed * Input.GetAxis("Vertical") * Time.deltaTime;
-            characterController.Move(new Vector3(characterController.velocity.x, climbVelocity));
+            characterController.Move(new Vector3(0, climbVelocity));
         } else {
             gravity = gravityStore;
         }
