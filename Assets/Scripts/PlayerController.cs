@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     private float fallSpeed;
     public float jumpForce;
     public float moveSpeed;
+    private Vector3 moveDirection = Vector3.zero;
     //Shotting
     public Transform bulletEmitter;
     public GameObject bullet;
@@ -37,9 +38,14 @@ public class PlayerController : MonoBehaviour {
     }
 
     void PlayerMove() {
+        moveDirection = new Vector3(0, 0, Input.GetAxis("Horizontal"));
         float xSpeed = Input.GetAxis("Horizontal");
         if(xSpeed != 0) {
             characterController.Move(new Vector3(xSpeed, 0, 0) * moveSpeed * Time.deltaTime);
+        }
+        //Rotation of the character depending of the axis z
+        if(moveDirection != Vector3.zero) {
+            transform.rotation = Quaternion.LookRotation(moveDirection);
         }
     }
 
@@ -66,17 +72,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     void ShootingBullets() {
-        //The player rotates to the mouse position
-        //Vector3 mousePosition = Input.mousePosition;
-        //mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-        //Vector3 direction = new Vector3(
-        //    mousePosition.x - transform.position.x,
-        //    mousePosition.y - transform.position.y, 0);
-
-        //transform.up = direction;
-
-        //just instantiate the bullet
         if (Input.GetButtonDown("Fire1")) {
             Instantiate(bullet, bulletEmitter.position, bulletEmitter.rotation);
         }
